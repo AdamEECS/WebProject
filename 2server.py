@@ -10,7 +10,6 @@
 3, 几个常用 HTML 标签及其用法
 4, 参数传递的两种方式
 
-
 """
 # 下面这行注释是给 atom 的 pylint 用的, 忽略
 # pylint: disable=C0103
@@ -39,7 +38,33 @@ class Request(object):
         self.path = ''
         self.query = {}
         self.body = ''
-        self.headers = ''
+        self.headers = {}
+        self.cookies = {}
+
+    def add_cookies(self):
+        """
+        height=169; user=gua
+        :return:
+        """
+        cookies = self.headers.get('Cookie', '')
+        kvs = cookies.split('; ')
+        log('cookie', kvs)
+        for kv in kvs:
+            if '=' in kv:
+                k, v = kv.split('=')
+                self.cookies[k] = v
+
+    def add_headers(self, header):
+        """
+        Accept-Language: zh-CN,zh;q=0.8
+        Cookie: height=169; user=gua
+        """
+        # lines = header.split('\r\n')
+        lines = header
+        for line in lines:
+            k, v = line.split(': ', 1)
+            self.headers[k] = v
+        self.add_cookies()
 
     def form(self):
         body = urllib.parse.unquote(self.body)
@@ -125,20 +150,17 @@ def run(host='', port=3000):
             connection, address = s.accept()
             r = connection.recv(1000)
             r = r.decode('utf-8')
-            # log('ip and request, {}\n{}'.format(address, request))
+            log('ip and request, {}\n{}'.format(address, r))
             # 因为 chrome 会发送空请求导致 split 得到空 list
             # 所以这里判断一下防止程序崩溃
             if len(r.split()) < 2:
                 continue
-            log('r: ', r)
             path = r.split()[1]
             # 设置 request 的 method
             request.method = r.split()[0]
+            request.add_headers(r.split('\r\n\r\n', 1)[0].split('\r\n')[1:])
             # 把 body 放入 request 中
-            request.headers = r.split('\r\n\r\n', 1)[0]
             request.body = r.split('\r\n\r\n', 1)[1]
-            log('headers: ', request.headers)
-            log('body: ', request.body)
             # 用 response_for_path 函数来得到 path 对应的响应内容
             response = response_for_path(path)
             # 把响应发送给客户端

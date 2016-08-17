@@ -1,42 +1,22 @@
 [
   {
     "username": "gua",
-    "password": "123"
-  },
-  {
-    "username": "gua1",
-    "password": "123"
-  },
-  {
-    "username": "gua2",
+    "id": 1,
     "password": "gua"
   },
   {
-    "username": "asdf+asdfasdf",
-    "password": "asdfasdf"
+    "username": "gua2",
+    "id": 2,
+    "password": "guw"
   },
   {
-    "username": "asdfas",
-    "password": "asdfas"
-  },
-  {
-    "username": "1223",
-    "password": "12313"
-  },
-  {
-    "username": "123",
-    "password": "qwe"
+    "username": "gw3",
+    "id": 3,
+    "password": "gw2"
   },
   {
     "username": "123",
-    "password": "984"
-  },
-  {
-    "username": "guagua",
-    "password": "hello"
-  },
-  {
-    "username": "Pony",
-    "password": "pony123"
+    "id": 4,
+    "password": "123"
   }
 ]

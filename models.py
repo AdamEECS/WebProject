@@ -10,14 +10,14 @@ def save(data, path):
     """
     s = json.dumps(data, indent=2, ensure_ascii=False)
     with open(path, 'w+', encoding='utf-8') as f:
-        log('save', path, s, data)
+        # log('save', path, s, data)
         f.write(s)
 
 
 def load(path):
     with open(path, 'r', encoding='utf-8') as f:
         s = f.read()
-        log('load', s)
+        # log('load', s)
         return json.loads(s)
 
 
@@ -53,6 +53,22 @@ class Model(object):
         ms = [cls(m) for m in models]
         return ms
 
+    @classmethod
+    def find_by(cls, **kwargs):
+        """
+        用法如下，kwargs 是只有一个元素的 dict
+        u = User.find_by(username='gua')
+        """
+        log('kwargs, ', kwargs)
+        k, v = '', ''
+        for key, value in kwargs.items():
+            k, v = key, value
+        all = cls.all()
+        for m in all:
+            if v == m.__dict__[k]:
+                return m
+        return None
+
     def __repr__(self):
         """
         __repr__ 是一个魔法方法
@@ -69,13 +85,23 @@ class Model(object):
         用 all 方法读取文件中的所有 model 并生成一个 list
         把 self 添加进去并且保存进文件
         """
-        log('debug save')
+        # log('debug save')
         models = self.all()
-        log('models', models)
+        # log('models', models)
+        last_id = self.get_last_id()
+        self.id = last_id + 1
         models.append(self)
         l = [m.__dict__ for m in models]
         path = self.db_path()
         save(l, path)
+
+    def get_last_id(self):
+        models = self.all()
+        last_id = 0
+        for m in models:
+            if m.id is not None and m.id > last_id:
+                last_id = m.id
+        return last_id
 
 
 class User(Model):
@@ -86,17 +112,16 @@ class User(Model):
     def __init__(self, form):
         self.username = form.get('username', '')
         self.password = form.get('password', '')
+        self.id = form.get('id', None)
 
     def validate_login(self):
-        user_all = self.all()
-        validate = False
-        for i in user_all:
-            if i.username == self.username and i.password == self.password:
-                validate = True
-                break
-        return validate
+        # return self.username == 'gua' and self.password == '123'
+        u = User.find_by(username=self.username)
+        return u is not None and u.password == self.password
 
     def validate_register(self):
+        log('validate_register')
+        log(self.get_last_id())
         return len(self.username) > 2 and len(self.password) > 2
 
 
@@ -107,3 +132,24 @@ class Message(Model):
     def __init__(self, form):
         self.author = form.get('author', '')
         self.message = form.get('message', '')
+        self.id = form.get('id', None)
+
+
+def test():
+    # users = User.all()
+    # u = User.find_by(username='gua')
+    # log('users', u)
+    form = dict(
+        username='gua',
+        password='gua',
+    )
+    u = User(form)
+    u.save()
+    u.save()
+    u.save()
+    u.save()
+    u.save()
+    u.save()
+
+if __name__ == '__main__':
+    test()
