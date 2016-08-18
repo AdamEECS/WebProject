@@ -120,8 +120,8 @@ class User(Model):
         return u is not None and u.password == self.password
 
     def validate_register(self):
-        log('validate_register')
-        log(self.get_last_id())
+        # log('validate_register')
+        # log(self.get_last_id())
         return len(self.username) > 2 and len(self.password) > 2
 
 
