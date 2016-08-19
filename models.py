@@ -69,6 +69,10 @@ class Model(object):
                 return m
         return None
 
+    @classmethod
+    def find(cls, id):
+        return cls.find_by(id=id)
+
     def __repr__(self):
         """
         __repr__ 是一个魔法方法
@@ -78,7 +82,7 @@ class Model(object):
         classname = self.__class__.__name__
         properties = ['{}: ({})'.format(k, v) for k, v in self.__dict__.items()]
         s = '\n'.join(properties)
-        return '< {}\n{} >\n'.format(classname, s)
+        return '< {}\n{} \n>\n'.format(classname, s)
 
     def save(self):
         """
@@ -88,20 +92,30 @@ class Model(object):
         # log('debug save')
         models = self.all()
         # log('models', models)
-        last_id = self.get_last_id()
-        self.id = last_id + 1
-        models.append(self)
+        # 如果没有 id，说明是新添加的元素
+        if self.id is None:
+            # 设置 self.id
+            # 先看看是否是空 list
+            if len(models) == 0:
+                # 我们让第一个元素的 id 为 1（当然也可以为 0）
+                self.id = 1
+            else:
+                m = models[-1]
+                # log('m', m)
+                self.id = m.id + 1
+            models.append(self)
+        else:
+            # index = self.find(self.id)
+            index = -1
+            for i, m in enumerate(models):
+                if m.id == self.id:
+                    index = i
+                    break
+            log('debug', index)
+            models[index] = self
         l = [m.__dict__ for m in models]
         path = self.db_path()
         save(l, path)
-
-    def get_last_id(self):
-        models = self.all()
-        last_id = 0
-        for m in models:
-            if m.id is not None and m.id > last_id:
-                last_id = m.id
-        return last_id
 
 
 class User(Model):
@@ -110,9 +124,10 @@ class User(Model):
     现在只有两个属性 username 和 password
     """
     def __init__(self, form):
+        self.id = form.get('id', None)
         self.username = form.get('username', '')
         self.password = form.get('password', '')
-        self.id = form.get('id', None)
+        self.note = form.get('note', '')
 
     def validate_login(self):
         # return self.username == 'gua' and self.password == '123'
@@ -120,8 +135,6 @@ class User(Model):
         return u is not None and u.password == self.password
 
     def validate_register(self):
-        # log('validate_register')
-        # log(self.get_last_id())
         return len(self.username) > 2 and len(self.password) > 2
 
 
@@ -130,9 +143,9 @@ class Message(Model):
     Message 是用来保存留言的 model
     """
     def __init__(self, form):
+        self.id = None
         self.author = form.get('author', '')
         self.message = form.get('message', '')
-        self.id = form.get('id', None)
 
 
 def test():
@@ -145,11 +158,12 @@ def test():
     )
     u = User(form)
     u.save()
-    u.save()
-    u.save()
-    u.save()
-    u.save()
-    u.save()
+    log('u.id', u.id)
+    u3 = User.find(3)
+    u3.password = '123 789'
+    u3.save()
+    log('u3', u3)
+    log(User.all())
 
 if __name__ == '__main__':
     test()

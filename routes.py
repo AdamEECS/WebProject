@@ -46,12 +46,12 @@ def route_index(request):
     return r.encode(encoding='utf-8')
 
 
-def response_with_headers(headers):
+def response_with_headers(headers, status_code=200):
     """
 Content-Type: text/html
 Set-Cookie: user=gua
     """
-    header = 'HTTP/1.x 210 VERY OK\r\n'
+    header = 'HTTP/1.x {} VERYOK\r\n'.format(status_code)
     header += ''.join(['{}: {}\r\n'.format(k, v)
                            for k, v in headers.items()])
     return header
@@ -86,6 +86,7 @@ def route_login(request):
     header = response_with_headers(headers)
     r = header + '\r\n' + body
     # log('login', r)
+    log('session:', session)
     return r.encode(encoding='utf-8')
 
 
@@ -110,22 +111,71 @@ def route_register(request):
     return r.encode(encoding='utf-8')
 
 
+def redirect(headers, location):
+    """
+    返回一个 302 重定向响应
+    """
+    headers['Location'] = location
+    header = response_with_headers(headers, 302)
+    r = header + '\r\n' + ''
+    return r.encode(encoding='utf-8')
+
+
 def route_message(request):
     """
     消息页面的路由函数
     """
+    headers = {
+        'Content-Type': 'text/html',
+        # 'Set-Cookie': 'height=169; gua=1; pwd=2; Path=/',
+        # 'Location': ''
+    }
+
     log('本次请求的 method', request.method)
+    username = current_user(request)
+    log('username', username)
+    if username == '游客':
+        # 没登录 不让看 重定向到 /
+        # headers['Location'] = '/'
+        # header = response_with_headers(headers, 302)
+        # r = header + '\r\n' + ''
+        # return r.encode(encoding='utf-8')
+        return redirect(headers, '/')
+    else:
+        header = response_with_headers(headers)
     if request.method == 'POST':
         form = request.form()
         msg = Message(form)
         log('post', form)
         message_list.append(msg)
         # 应该在这里保存 message_list
-    header = 'HTTP/1.x 200 OK\r\nContent-Type: text/html\r\n'
     # body = '<h1>消息版</h1>'
     body = template('html_basic.html')
     msgs = '<br>'.join([str(m) for m in message_list])
     body = body.replace('{{messages}}', msgs)
+    r = header + '\r\n' + body
+    return r.encode(encoding='utf-8')
+
+
+def route_profile(request):
+    headers = {
+        'Content-Type': 'text/html',
+    }
+
+    log('本次请求的 method', request.method)
+    username = current_user(request)
+    log('username', username)
+    if username == '游客':
+        # 没登录 不让看 重定向到 /
+        return redirect(headers, '/')
+    else:
+        header = response_with_headers(headers)
+
+    body = template('profile.html')
+    u = User.find_by(username=username)
+    # log('u: ', u)
+    profile = 'id:{}<br>name:{}<br>note:{}'.format(u.id, u.username, u.note)
+    body = body.replace('{{profile}}', profile)
     r = header + '\r\n' + body
     return r.encode(encoding='utf-8')
 
@@ -150,4 +200,5 @@ route_dict = {
     '/login': route_login,
     '/register': route_register,
     '/messages': route_message,
+    '/profile': route_profile,
 }

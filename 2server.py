@@ -70,6 +70,7 @@ class Request(object):
         body = urllib.parse.unquote(self.body)
         args = body.split('&')
         f = {}
+        # log('args: ', args)
         for arg in args:
             k, v = arg.split('=')
             f[k] = v
@@ -150,7 +151,7 @@ def run(host='', port=3000):
             connection, address = s.accept()
             r = connection.recv(1000)
             r = r.decode('utf-8')
-            log('ip and request, {}\n{}'.format(address, r))
+            # log('ip and request, {}\n{}'.format(address, r))
             # 因为 chrome 会发送空请求导致 split 得到空 list
             # 所以这里判断一下防止程序崩溃
             if len(r.split()) < 2:
