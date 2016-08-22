@@ -1,32 +1,26 @@
 [
   {
-    "user_id": 3,
-    "id": 4,
     "created_time": 1471610345,
-    "content": "你好"
+    "id": 4,
+    "content": "你好",
+    "user_id": 3
   },
   {
-    "user_id": 1,
+    "created_time": 1471838115,
     "id": 6,
-    "created_time": 1471613980,
-    "content": "12"
+    "content": "hello",
+    "user_id": 1
   },
   {
-    "user_id": 3,
+    "created_time": 1471846907,
     "id": 7,
-    "created_time": 1471837499,
-    "content": "hahahha"
+    "content": "哈啰，瓜！",
+    "user_id": 3
   },
   {
-    "user_id": 3,
-    "id": 8,
-    "created_time": 1471837487,
-    "content": "qwer"
-  },
-  {
-    "user_id": 3,
-    "id": 9,
-    "created_time": 1471837493,
-    "content": "asdasd"
+    "created_time": 1471838131,
+    "id": 10,
+    "content": "world",
+    "user_id": 1
   }
 ]
