@@ -150,7 +150,7 @@ def get(url):
     s = socket_by_protocol(protocol)
     s.connect((host, port))
 
-    request = 'GET {} HTTP/1.1\r\nhost: {}\r\nConnection: close\r\nCookie: user=ssk2fdfdka9e8aa9\r\n\r\n'.format(path, host)
+    request = 'GET {} HTTP/1.1\r\nhost: {}\r\nConnection: close\r\n\r\n'.format(path, host)
     encoding = 'utf-8'
     s.send(request.encode(encoding))
 
@@ -166,8 +166,7 @@ def get(url):
 
 
 def main():
-    # url = 'http://movie.douban.com/top250'
-    url = 'http://localhost:3000/login'
+    url = 'http://movie.douban.com/top250'
     status_code, headers, body = get(url)
     print(status_code, headers, body)
 
@@ -240,5 +239,5 @@ def test():
 
 
 if __name__ == '__main__':
-    # test()
+    test()
     main()

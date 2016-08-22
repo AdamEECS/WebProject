@@ -28,8 +28,10 @@ import urllib.parse
 from utils import log
 
 from routes import route_static
-from routes import route_dict
 
+# 导入 路由函数
+from routes import route_dict as route_dict_main
+from routes_weibo import route_dict as route_dict_weibo
 
 # 定义一个 class 用于保存请求的数据
 class Request(object):
@@ -40,6 +42,12 @@ class Request(object):
         self.body = ''
         self.headers = {}
         self.cookies = {}
+
+    def __repr__(self):
+        classname = self.__class__.__name__
+        properties = ['{}: ({})'.format(k, v) for k, v in self.__dict__.items()]
+        s = '\n'.join(properties)
+        return '< {}\n{} \n>\n'.format(classname, s)
 
     def add_cookies(self):
         """
@@ -70,7 +78,6 @@ class Request(object):
         body = urllib.parse.unquote(self.body)
         args = body.split('&')
         f = {}
-        # log('args: ', args)
         for arg in args:
             k, v = arg.split('=')
             f[k] = v
@@ -130,7 +137,9 @@ def response_for_path(path):
         # '/login': route_login,
         # '/messages': route_message,
     }
-    r.update(route_dict)
+    r.update(route_dict_main)
+    r.update(route_dict_weibo)
+    # register_routes(route_dict_weibo, prefix='/weibo')
     response = r.get(path, error)
     return response(request)
 
