@@ -173,7 +173,7 @@ def run(host='', port=3000):
             request.body = r.split('\r\n\r\n', 1)[1]
             # 用 response_for_path 函数来得到 path 对应的响应内容
             response = response_for_path(path)
-            # 把响应发送给客户端
+            # 把响应发送给客户端 
             connection.sendall(response)
             # 处理完请求, 关闭连接
             connection.close()

@@ -166,7 +166,7 @@ def get(url):
 
 
 def main():
-    url = 'http://movie.douban.com/top250'
+    url = 'http://www.google.com'
     status_code, headers, body = get(url)
     print(status_code, headers, body)
 
@@ -239,5 +239,5 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    # test()
     main()
