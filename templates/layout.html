@@ -22,23 +22,17 @@ gua-detail 在右边占据 25%
     	    height: 50px;
     	    background: lightsteelblue;
     	}
-    	.gua-container{
-    	    display:flex;
-    	}
         .gua-content {
             height: 80px;
     	    background: lightcoral;
-    	    flex-grow:2;
     	}
         .gua-index {
             height: 50px;
     	    background: lightblue;
-    	    flex-grow:1;
     	}
     	.gua-detail {
             height: 30px;
     	    background: lightyellow;
-    	    flex-grow:1;
     	}
     	.gua-footer {
             height: 50px;
@@ -47,7 +41,18 @@ gua-detail 在右边占据 25%
 	</style>
     <!-- 你的 css 写在这个 style 标签里 -->
     <style>
-
+        .gua-container {
+    	    display:flex;
+    	}
+    	.gua-container-left {
+    	    flex-grow:1;
+    	}
+    	.gua-container-center {
+    	    flex-grow:2;
+    	}
+    	.gua-container-right {
+    	    flex-grow:1;
+    	}
     </style>
 </head>
 <body>
@@ -56,13 +61,13 @@ gua-detail 在右边占据 25%
             header
         </div>
         <div class="gua-container">
-            <div class="gua-index">
+            <div class="gua-index gua-container-left">
                 index
             </div>
-            <div class="gua-content">
+            <div class="gua-content gua-container-center">
                 content
             </div>
-            <div class="gua-detail">
+            <div class="gua-detail gua-container-right">
                 detail
             </div>
         </div>
