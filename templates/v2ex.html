@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V2EX</title>
+    <style media="screen">
+      body {
+        padding: 0px;
+        margin: 0px;
+        font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+      }
+      .head {
+        height: 38px;
+        padding: 6px 20px 0px 20px;
+      }
+      .head > img {
+        width: 94px;
+        height: 30px;
+        margin-right: 16px;
+      }
+      .head > .right > span {
+        color: #556;
+        font-size: 15px;
+        font-weight: 500;
+        margin: 6px 1px 0 10px;
+        display: inline-block;
+      }
+      .left {
+        float: left;
+      }
+      .right {
+        float: right;
+      }
+      .search {
+        width: 276px;
+        height: 28px;
+        background-size: 276px 28px;
+        background-image: url('https://www.v2ex.com/static/img/qbar_light@2x.png');
+        background-repeat: no-repeat;
+      }
+      .content {
+        background-color: #e2e2e2;
+        background-image: url("https://www.v2ex.com/static/img/shadow_light.png");
+        background-repeat: repeat-x;
+        min-width: 600px;
+        max-width: 1100px;
+        width: 100%;
+        min-height: 530px;
+        margin: 0px auto 0px auto;
+        font-size: 12px;
+        line-height: 120%;
+      }
+      .clearfix::after {
+        clear: both;
+      }
+      .main {
+        margin: 20px 0px 0px 20px;
+
+        width: 668px;
+        min-height: 400px;
+      }
+      .rightbar {
+        width: 270px;
+        margin: 20px 20px 0 0;
+      }
+      .box {
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid #e2e2e2;
+      }
+      .fade {
+        color: #ccc;
+      }
+      .cell {
+        padding: 10px;
+        line-height: 120%;
+        border-bottom: 1px solid #e2e2e2;
+      }
+      .inner {
+        padding: 10px;
+        line-height: 150%;
+      }
+      .center {
+        text-align: center;
+      }
+      .normal.button {
+          background-color: #fff;
+          color: #333;
+          text-shadow: 0px 1px 0px #fff;
+          text-decoration: none;
+          font-weight: bold;
+          box-shadow: 0px 1px 0px rgba(66, 66, 77, 0.1);
+      }
+      .super.button {
+          background-image: url("https://www.v2ex.com/static/img/bg_blended_light.png");
+          padding: 4px 8px 4px 8px;
+          border: 1px solid rgba(80,80,90, 0.2);
+          border-bottom-color: rgba(80,80,90, 0.35);
+          border-radius: 3px;
+          font-size: 12px;
+          outline: none;
+      }
+      a {
+          color: #778087;
+          text-decoration: none;
+          word-break: break-all;
+      }
+      .margin-top-20 {
+        margin: 20px auto 0 auto;
+      }
+      .margin-top-5 {
+        margin-top: 5px;
+      }
+      a.tab_current {
+          display: inline-block;
+          font-size: 13px;
+          line-height: 13px;
+          padding: 5px 8px 5px 8px;
+          margin-right: 5px;
+          border-radius: 3px;
+          background-color: #334;
+          color: #fff;
+      }
+      a.tab {
+          display: inline-block;
+          font-size: 13px;
+          line-height: 13px;
+          padding: 5px 8px 5px 8px;
+          margin-right: 5px;
+          border-radius: 3px;
+          color: #555;
+      }
+      .tabs {
+        background-color: #f9f9f9;
+        padding: 10px 10px 10px 20px;
+      }
+      .tabs > a {
+        margin-right: 10px;
+      }
+      .item {
+        height: 48px;
+        padding: 10px;
+      }
+      img.avatar {
+        border-radius: 4px;
+      }
+      .item-title {
+        font-size: 16px;
+        line-height: 130%;
+        text-shadow: 0px 1px 0px #fff;
+        margin-left: 60px;
+      }
+      .item-title > a {
+        display: inline-block;
+      }
+      .small {
+          font-size: 11px;
+      }
+      a.node {
+          background-color: #f5f5f5;
+          font-size: 10px;
+          line-height: 10px;
+          display: inline-block;
+          padding: 4px 4px 4px 4px;
+          -moz-border-radius: 2px;
+          -webkit-border-radius: 2px;
+          border-radius: 2px;
+          text-decoration: none;
+          color: #999;
+      }
+      a.count_livid {
+          line-height: 12px;
+          font-weight: bold;
+          color: white;
+          background-color: #aab0c6;
+          display: inline-block;
+          padding: 2px 10px 2px 10px;
+          -moz-border-radius: 12px;
+          -webkit-border-radius: 12px;
+          border-radius: 12px;
+          text-decoration: none;
+          margin-right: 5px;
+          word-break: keep-all;
+      }
+      .count-div {
+        margin-top: 15px;
+      }
+    </style>
+</head>
+<body>
+    <div class="head">
+      <img class="left" src="https://cdn.v2ex.co/site/logo@2x.png?m=1346064962" alt="" />
+      <div class="search left"></div>
+      <div class="right">
+        <span>首页</span>
+        <span>注册</span>
+        <span>登录</span>
+      </div>
+    </div>
+    <div class="content clearfix">
+      <div class="main box left">
+        <div class="inner title">
+          <a href="#" class="tab_current">技术</a>
+          <a href="#" class="tab">创意</a>
+          <a href="#" class="tab">好玩</a>
+          <a href="#" class="tab">Apple</a>
+          <a href="#" class="tab">酷工作</a>
+          <a href="#" class="tab">交易</a>
+          <a href="#" class="tab">城市</a>
+          <a href="#" class="tab">问与答</a>
+          <a href="#" class="tab">最热</a>
+          <a href="#" class="tab">全部</a>
+          <a href="#" class="tab">R2</a>
+        </div>
+        <div class="cell tabs">
+          <a href="#">程序员</a>
+          <a href="#">Python</a>
+          <a href="#">iDev</a>
+          <a href="#">Android</a>
+          <a href="#">Linux</a>
+          <a href="#">node.js</a>
+          <a href="#">云计算</a>
+          <a href="#">宽带症候群</a>
+        </div>
+        <div class="">
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="http://cdn.v2ex.co/avatar/9024/ae2d/97887_normal.png?m=1440729706" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">24</a>
+            </div>
+            <div class="item-title">
+              <a href="#">增加爬虫爬取速度的方式叫并行还是并发呢？</a><br>
+              <span class="small fade">
+                <a class="node" href="#">程序员</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">hujianxin</a></strong>
+                &nbsp;•&nbsp; 8 分钟前 &nbsp;•&nbsp; 最后回复来自
+                <strong><a href="#">visionsmile</a></strong>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="http://cdn.v2ex.co/gravatar/18890197dbd9d206f93e9b20bb174a6a?s=48&d=retro" alt="" />
+            </div>
+            <div class="item-title">
+              <a href="#">有没有好用的第三方短信接口推荐一下</a><br>
+              <span class="small fade">
+                <a class="node" href="#">云计算</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="http://cdn.v2ex.co/avatar/95d2/db28/159090_normal.png?m=1462975899" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">9</a>
+            </div>
+            <div class="item-title">
+              <a href="#">阿里云工单系统启动：内个 CDN 怎么开启的 HTTP/2？</a><br>
+              <span class="small fade">
+                <a class="node" href="#">云计算</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">qcloud</a></strong>
+                &nbsp;•&nbsp; 11 分钟前 &nbsp;•&nbsp; 最后回复来自
+                <strong><a href="#">qcloud</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="http://cdn.v2ex.co/gravatar/cd4fb6e8b599fccdbc0546b306da078a?s=48&d=retro" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">13</a>
+            </div>
+            <div class="item-title">
+              <a href="#">如何回复产品经理"这个功能为什么不能做?"这样的问句?</a><br>
+              <span class="small fade">
+                <a class="node" href="#">程序员</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="http://cdn.v2ex.co/avatar/5c41/f2f3/26661_normal.png?m=1347454581" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">5</a>
+            </div>
+            <div class="item-title">
+              <a href="#">为什么你需要一个 mock server</a><br>
+              <span class="small fade">
+                <a class="node" href="#">JavaScript</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="http://cdn.v2ex.co/avatar/57e7/710f/42926_normal.png?m=1461811330" alt="" />
+            </div>
+            <div class="item-title">
+              <a href="#">	QQ 聊天能被监控吗？在公司</a><br>
+              <span class="small fade">
+                <a class="node" href="#">程序员</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="rightbar right">
+        <div class="box">
+
+          <div class="cell">
+            <strong>V2EX = way to explore</strong>
+            <div class="fade margin-top-5">
+              V2EX 是一个关于分享和探索的地方
+            </div>
+          </div>
+
+          <div class="inner">
+            <div class="center">
+              <a href="#" class="super normal button">现在注册</a>
+              <div class="margin-top-20">
+                已注册用户请  <a href="#">登录</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="box inner margin-top-20">
+        </div>
+
+        <div class="box margin-top-20">
+          <div class="cell">
+            今日热议主题
+          </div>
+          <div class="cell">
+            	当得知 supersu 被一家北京的公司收购，我内心是复杂的。
+          </div>
+          <div class="cell">
+            	Lastpass, 1Password, Keepass, 你选择哪一个？
+          </div>
+          <div class="cell">
+            	喜大普奔， golang.org 可以直接访问了
+          </div>
+          <div class="cell">
+            准备做一个主机分享站点 以测评推荐为主 大家提提意见吧
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="foot">
+      创意工作者们的社区
+    </div>
+</body>
+</html>
