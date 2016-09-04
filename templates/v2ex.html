@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>V2EX</title>
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
     <style media="screen">
       body {
         padding: 0px;
@@ -186,6 +187,9 @@
       .count-div {
         margin-top: 15px;
       }
+      #tab2_div {
+        display: none;
+      }
     </style>
 </head>
 <body>
@@ -201,8 +205,8 @@
     <div class="content clearfix">
       <div class="main box left">
         <div class="inner title">
-          <a href="#" class="tab_current">技术</a>
-          <a href="#" class="tab">创意</a>
+          <a href="#" class="tab_current" id='tab1'>技术</a>
+          <a href="#" class="tab" id="tab2">创意</a>
           <a href="#" class="tab">好玩</a>
           <a href="#" class="tab">Apple</a>
           <a href="#" class="tab">酷工作</a>
@@ -223,7 +227,7 @@
           <a href="#">云计算</a>
           <a href="#">宽带症候群</a>
         </div>
-        <div class="">
+        <div class="" id="tab1_div">
           <div class="cell item ">
             <div class="left img-middle ">
               <img class="avatar" src="http://cdn.v2ex.co/avatar/9024/ae2d/97887_normal.png?m=1440729706" alt="" />
@@ -327,6 +331,112 @@
 
         </div>
 
+        <div class="" id="tab2_div">
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="https://cdn.v2ex.co/avatar/0808/f7df/46773_normal.png?m=1472985348" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">4</a>
+            </div>
+            <div class="item-title">
+              <a href="#">BGmi，用命令行追番</a><br>
+              <span class="small fade">
+                <a class="node" href="#">分享创造</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">hujianxin</a></strong>
+                &nbsp;•&nbsp; 8 分钟前 &nbsp;•&nbsp; 最后回复来自
+                <strong><a href="#">visionsmile</a></strong>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="https://cdn.v2ex.co/avatar/018d/02c9/104805_normal.png?m=1426468334" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">11</a>
+            </div>
+            <div class="item-title">
+              <a href="#">你能不能看到图片里隐藏的 V2EX 这几个立体文字？</a><br>
+              <span class="small fade">
+                <a class="node" href="#">分享创造</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="https://cdn.v2ex.co/avatar/5f76/7779/76329_normal.png?m=1412860376" alt="" />
+            </div>
+
+            <div class="item-title">
+              <a href="#">Python QR Code 生成器：动态二维码、图片二维码</a><br>
+              <span class="small fade">
+                <a class="node" href="#">分享创造</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">qcloud</a></strong>
+                &nbsp;•&nbsp; 11 分钟前 &nbsp;•&nbsp; 最后回复来自
+                <strong><a href="#">qcloud</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="https://cdn.v2ex.co/avatar/7d6b/822f/165474_normal.png?m=1472533335" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">2</a>
+            </div>
+            <div class="item-title">
+              <a href="#">	快速切换 macOS 上截屏的阴影</a><br>
+              <span class="small fade">
+                <a class="node" href="#">分享创造</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="https://cdn.v2ex.co/avatar/364d/be79/108983_normal.png?m=1468133871" alt="" />
+            </div>
+
+            <div class="item-title">
+              <a href="#">Docker image for lnmp</a><br>
+              <span class="small fade">
+                <a class="node" href="#">分享创造</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="cell item ">
+            <div class="left img-middle ">
+              <img class="avatar" src="https://cdn.v2ex.co/avatar/7c08/f514/28720_normal.png?m=1352196558" alt="" />
+            </div>
+            <div class="right count-div">
+              <a href="#" class="count_livid">7</a>
+            </div>
+            <div class="item-title">
+              <a href="#">gluebin：基于 go 和 redis 的 pastebin 服务</a><br>
+              <span class="small fade">
+                <a class="node" href="#">分享创造</a>
+                &nbsp;•&nbsp;
+                <strong><a href="#">jizhidebocai</a></strong>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
       </div>
       <div class="rightbar right">
         <div class="box">
@@ -375,5 +485,23 @@
     <div class="foot">
       创意工作者们的社区
     </div>
+    <script type="text/javascript">
+      $('#tab1').on('click', function(){
+        $('#tab2').toggleClass('tab_current')
+        $('#tab2').toggleClass('tab')
+        $('#tab1').toggleClass('tab_current')
+        $('#tab1').toggleClass('tab')
+        $('#tab1_div').toggle()
+        $('#tab2_div').toggle()
+      })
+      $('#tab2').on('click', function(){
+        $('#tab1').toggleClass('tab_current')
+        $('#tab1').toggleClass('tab')
+        $('#tab2').toggleClass('tab_current')
+        $('#tab2').toggleClass('tab')
+        $('#tab1_div').toggle()
+        $('#tab2_div').toggle()
+      })
+    </script>
 </body>
 </html>
